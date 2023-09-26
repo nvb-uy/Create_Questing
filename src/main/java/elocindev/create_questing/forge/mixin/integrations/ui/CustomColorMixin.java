@@ -16,6 +16,8 @@ public class CustomColorMixin {
     public void create_questing_changeShapeTexture(PoseStack matrixStack, int x, int y, int w, int h, CallbackInfo info) {   
         QuestShape instance = (QuestShape)(Object)this;     
 
+        // this is some debug stuff
+
         CreateQuesting.LOGGER.info("Hello world!");
         CreateQuesting.LOGGER.info("DRAW Shape: "+instance.shape.texture.getNamespace()+ " : "+ instance.shape.texture.getPath());
     }

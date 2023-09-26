@@ -24,7 +24,7 @@ public class ConfigBuilder {
             exampleConfig.create_chapter_names.add("create");
             exampleConfig.create_chapter_names.add("blueprint");
             exampleConfig.blueprint_background_scale = 0.5F;
-            exampleConfig.blueprint_background_opacity = 1.0F;
+            exampleConfig.blueprint_background_opacity = 0.8F;
             exampleConfig.blueprint_background_overlay_red = 255;
             exampleConfig.blueprint_background_overlay_green = 255;
             exampleConfig.blueprint_background_overlay_blue = 255;
