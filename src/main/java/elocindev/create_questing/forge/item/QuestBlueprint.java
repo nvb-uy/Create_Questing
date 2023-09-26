@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -20,7 +21,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class QuestBlueprint extends Item {
     public QuestBlueprint() {
-        super((new Properties()).stacksTo(1));
+        super((new Properties())
+         .stacksTo(1)
+         .tab(CreativeModeTab.TAB_TOOLS)
+        );
     }
 
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {

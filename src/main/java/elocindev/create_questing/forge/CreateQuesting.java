@@ -6,9 +6,10 @@ import com.mojang.logging.LogUtils;
 
 import elocindev.create_questing.forge.config.ConfigBuilder;
 import elocindev.create_questing.forge.config.ConfigEntries;
+import elocindev.create_questing.forge.registry.ItemRegistry;
 import elocindev.create_questing.forge.theme.ThemeSetup;
 import net.minecraftforge.common.MinecraftForge;
-
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -21,8 +22,12 @@ public class CreateQuesting {
 
     
     public CreateQuesting() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
+
+        ItemRegistry.REGISTRY.register(bus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
