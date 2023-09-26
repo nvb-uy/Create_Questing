@@ -29,12 +29,13 @@ public class QuestScreenMixin {
 
         if (inst.selectedChapter == null) return;
 
-        if (cfg.enable_theme_only_in_create_chapters)
+        if (cfg.enable_theme_only_in_create_chapters) {
             for (String keyword : cfg.create_chapter_names) {
                 if ((inst.selectedChapter.getTitle().toString().toLowerCase().contains(keyword.toLowerCase()))) valid = true;
             }
 
-        if (!valid) return;
+            if (!valid) return;
+        }
         
         int scale = (int)(cfg.blueprint_background_scale * 256);
 
