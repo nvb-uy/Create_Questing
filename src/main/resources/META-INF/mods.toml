@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[37,)" 
+license="All Rights Reserved"
+
+[[mods]] 
+modId="create_questing" 
+version="1.0.0" 
+displayName="Create Questing" 
+logoFile="icon.png" 
+credits="https://github.com/nvb-uy/Create_Questing" 
+authors="ElocinDev" 
+description='''
+Makes FTB Quests have Create's Style.
+'''
+[[dependencies.create_questing]]
+    modId="forge" 
+    mandatory=true 
+    versionRange="[37,)" 
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.create_questing]]
+    modId="ftbquests" 
+    mandatory=true 
+    versionRange="[0,)" 
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.create_questing]]
+    modId="ftblibrary" 
+    mandatory=true 
+    versionRange="[0,)" 
+    ordering="NONE"
+    side="BOTH"
