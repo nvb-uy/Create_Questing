@@ -1,7 +1,6 @@
 package elocindev.create_questing.forge.mixin.integrations.ui;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -18,9 +17,6 @@ import elocindev.create_questing.forge.theme.CreateTheme;
 
 @Mixin(QuestScreen.class)
 public class QuestScreenMixin {
-    @Shadow
-    public void drawBackground(PoseStack matrixStack, Theme theme, int x, int y, int w, int h) {}
-
     @Inject(method = "drawBackground", remap = false, at = @At("HEAD"), cancellable = true)
     public void create_questing_drawBlueprint(PoseStack matrixStack, Theme theme, int x, int y, int w, int h, CallbackInfo info) {        
         QuestScreen inst = (QuestScreen)(Object)this;

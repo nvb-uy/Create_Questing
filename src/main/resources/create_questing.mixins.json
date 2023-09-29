@@ -4,11 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "create_questing.refmap.json",
   "mixins": [
-    "integrations.quests.QuestShapeMixin",
-    "integrations.ui.QuestScreenMixin",    
-    "integrations.ui.CustomColorMixin"
-  ],
-  "client": [
+    "integrations.ui.QuestScreenMixin"
   ],
   "minVersion": "0.8"
 }
