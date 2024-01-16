@@ -1,20 +1,17 @@
 package elocindev.create_questing.forge;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import elocindev.create_questing.forge.config.ConfigBuilder;
 import elocindev.create_questing.forge.config.ConfigEntries;
 import elocindev.create_questing.forge.registry.ItemRegistry;
 import elocindev.create_questing.forge.theme.ThemeSetup;
+import elocindev.necronomicon.api.config.v1.NecConfigAPI;
+import elocindev.necronomicon.api.resource.v1.ResourceBuilderAPI;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.server.packs.repository.Pack;
-import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.server.packs.repository.Pack.Position;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,14 +20,13 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.resource.PathPackResources;
 
 @Mod(CreateQuesting.MODID)
 @Mod.EventBusSubscriber(modid = CreateQuesting.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CreateQuesting {
     public static final String MODID = "create_questing";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static ConfigEntries Config = ConfigBuilder.loadConfig();
+    public static ConfigEntries Config;
 
     
     public CreateQuesting() {
@@ -40,10 +36,15 @@ public class CreateQuesting {
         MinecraftForge.EVENT_BUS.register(this);
 
         ItemRegistry.REGISTRY.register(bus);
+
+        ResourceBuilderAPI.registerBuiltinPack(MODID, ModList.get().getModFileById(MODID).getFile().findResource("quest_shapes"), 
+                Component.literal("Create Styled Quest Shapes"), false, Component.literal("Adds create-like quest shapes"), PackType.CLIENT_RESOURCES, Position.TOP, false);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        Config = ConfigBuilder.loadConfig();
+        NecConfigAPI.registerConfig(ConfigEntries.class);
+
+        Config = ConfigEntries.INSTANCE;
         ThemeSetup.setup();
 
 		LOGGER.info("Loaded Create Questing Config");
@@ -51,24 +52,8 @@ public class CreateQuesting {
 
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event) {
-        try {
-            if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-                var resourcePath = ModList.get().getModFileById(MODID).getFile().findResource("quest_shapes");
-                var pack = new PathPackResources(ModList.get().getModFileById(MODID).getFile().getFileName() + ":" + resourcePath, resourcePath);
-                
-                var metadataSection = pack.getMetadataSection(PackMetadataSection.SERIALIZER);
-                
-                if (metadataSection != null)
-                {
-                    event.addRepositorySource((packConsumer, packConstructor) ->
-                            packConsumer.accept(packConstructor.create(
-                                    "builtin/create_questing", Component.literal("Create Styled Quest Shapes"), false,
-                                    () -> pack, metadataSection, Pack.Position.TOP, PackSource.BUILT_IN, false)));
-                }
-            }
-        }
-        catch(IOException ex) {
-            throw new RuntimeException(ex);
+        if (event.getPackType() == PackType.CLIENT_RESOURCES) {            
+            
         }
     }
 }

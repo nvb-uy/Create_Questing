@@ -154,13 +154,16 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("curse.maven:ftb-quests-forge-289412:4760341")
-    implementation fg.deobf("curse.maven:ftb-library-forge-404465:4661834")
+    implementation fg.deobf("curse.maven:ftb-quests-forge-289412:4929479")
+    implementation fg.deobf("curse.maven:ftb-library-forge-404465:4864329")
 
     // FTB Quests dependencies
-    implementation fg.deobf("curse.maven:architectury-api-419699:4555749")
-    implementation fg.deobf("curse.maven:item-filters-309674:4553326")
-    implementation fg.deobf("curse.maven:ftb-teams-forge-404468:4611938")
+    implementation fg.deobf("curse.maven:architectury-api-419699:4663010")
+    implementation fg.deobf("curse.maven:item-filters-309674:4838266")
+    implementation fg.deobf("curse.maven:ftb-teams-forge-404468:4623116")
+
+    // Necronomicon
+    implementation fg.deobf("curse.maven:necronomicon-586157:4857971")
 }
 
 mixin {
